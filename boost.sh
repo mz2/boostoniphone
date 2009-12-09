@@ -1,10 +1,15 @@
 #================================================================================
+# Filename:  boost.sh
+# Author:    Pete Goodliffe
+# Copyright: (c) Copyright 2009 Pete Goodliffe
+# Licence:   Please use this freely, with attribution
+#================================================================================
 #
 # Builds boost for the iPhone
 # Creates a set of universal libraries that can be used on an iPhone and in the
 # iPhone simulator.
 #
-# To start, define:
+# To configure, define:
 #    BOOST_LIBS:        which libraries to build
 #    BOOST_VERSION:     version number of the boost library (e.g. 1_41_0)
 #    IPHONE_SDKVERSION: iPhone SDK version (e.g. 3.0)
@@ -16,6 +21,7 @@
 
 : ${BUILDDIR:=`pwd`/build}
 : ${PREFIXDIR:=`pwd`/prefix}
+: ${FRAMEWORK_BUILD_DIR:=`pwd`/framework}
 
 BOOST_TARBALL=boost_$BOOST_VERSION.tar.bz2
 BOOST_SRC=boost_${BOOST_VERSION}
@@ -197,7 +203,66 @@ lipoAllBoostLibraries()
 }
 
 #================================================================================
-# Start execution here
+
+                    VERSION_TYPE=Alpha
+                  FRAMEWORK_NAME=Boost
+               FRAMEWORK_VERSION=A
+
+       FRAMEWORK_CURRENT_VERSION=1.0
+ FRAMEWORK_COMPATIBILITY_VERSION=1.0
+
+buildFramework()
+{
+    FRAMEWORK_DIR=$FRAMEWORK_BUILD_DIR/$FRAMEWORK_NAME.framework
+
+    echo "Framework: Setting up directories..."
+    mkdir -p $FRAMEWORK_DIR
+    mkdir -p $FRAMEWORK_DIR/Versions
+    mkdir -p $FRAMEWORK_DIR/Versions/$FRAMEWORK_VERSION
+    mkdir -p $FRAMEWORK_DIR/Versions/$FRAMEWORK_VERSION/Resources
+    mkdir -p $FRAMEWORK_DIR/Versions/$FRAMEWORK_VERSION/Headers
+    mkdir -p $FRAMEWORK_DIR/Versions/$FRAMEWORK_VERSION/Documentation
+
+    echo "Framework: Creating symlinks..."
+    ln -s $FRAMEWORK_VERSION               $FRAMEWORK_DIR/Versions/Current
+    ln -s Versions/Current/Headers         $FRAMEWORK_DIR/Headers
+    ln -s Versions/Current/Resources       $FRAMEWORK_DIR/Resources
+    ln -s Versions/Current/Documentation   $FRAMEWORK_DIR/Documentation
+    ln -s Versions/Current/$FRAMEWORK_NAME $FRAMEWORK_DIR/$FRAMEWORK_NAME
+
+    FRAMEWORK_INSTALL_NAME=$FRAMEWORK_DIR/Versions/$FRAMEWORK_VERSION/$FRAMEWORK_NAME
+
+    cp $PREFIXDIR/lib/libboost-filesystem.a "$FRAMEWORK_INSTALL_NAME"
+
+    echo "Framework: Copying includes..."
+    cp -r $PREFIXDIR/include/boost/*  $FRAMEWORK_DIR/Headers/
+    echo "Framework: Creating plist..."
+    cat > $FRAMEWORK_DIR/Resources/Info.plist <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>${FRAMEWORK_NAME}</string>
+	<key>CFBundleIdentifier</key>
+	<string>org.boost</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundlePackageType</key>
+	<string>FMWK</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>${FRAMEWORK_CURRENT_VERSION}</string>
+</dict>
+</plist>
+EOF
+}
+
+#================================================================================
+# Execution starts here
 #================================================================================
 
 echo "Tarball is:  $BOOST_TARBALL"
@@ -216,6 +281,7 @@ inventMissingHeaders
 buildBoostForiPhoneOS
 buildBoostForiPhoneSimulator
 lipoAllBoostLibraries
+buildFramework
 
 echo "Completed successfully"
 
