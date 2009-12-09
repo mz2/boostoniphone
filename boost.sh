@@ -5,27 +5,44 @@
 # Licence:   Please use this freely, with attribution
 #================================================================================
 #
-# Builds boost for the iPhone
+# Builds a Boost framework for the iPhone.
 # Creates a set of universal libraries that can be used on an iPhone and in the
 # iPhone simulator.
 #
-# To configure, define:
+# To configure the script, define:
 #    BOOST_LIBS:        which libraries to build
 #    BOOST_VERSION:     version number of the boost library (e.g. 1_41_0)
 #    IPHONE_SDKVERSION: iPhone SDK version (e.g. 3.0)
+#
+# Then go get the source tar.bz of the boost you want to build, shove it in the
+# same directory as this script, and run "./boost.sh"> Grab a cuppa. And voila.
 #================================================================================
 
 : ${BOOST_VERSION:=1_41_0}
-: ${BOOST_LIBS:="--with-thread --with-signals --with-filesystem --with-regex --with-program_options --with-system "}
+: ${BOOST_LIBS:="thread signals filesystem regex program_options system"}
 : ${IPHONE_SDKVERSION:=3.0}
 
 : ${BUILDDIR:=`pwd`/build}
 : ${PREFIXDIR:=`pwd`/prefix}
-: ${FRAMEWORK_BUILD_DIR:=`pwd`/framework}
+: ${FRAMEWORKDIR:=`pwd`/framework}
 
 BOOST_TARBALL=boost_$BOOST_VERSION.tar.bz2
 BOOST_SRC=boost_${BOOST_VERSION}
 
+#================================================================================
+
+echo "BOOST_VERSION:     $BOOST_VERSION"
+echo "BOOST_LIBS:        $BOOST_LIBS"
+echo "BOOST_TARBALL:     $BOOST_TARBALL"
+echo "BOOST_SRC:         $BOOST_SRC"
+echo "BUILDDIR:          $BUILDDIR"
+echo "PREFIXDIR:         $PREFIXDIR"
+echo "FRAMEWORKDIR:      $FRAMEWORKDIR"
+echo "IPHONE_SDKVERSION: $IPHONE_SDKVERSION"
+echo
+
+#================================================================================
+# Functions
 #================================================================================
 
 abort()
@@ -62,7 +79,7 @@ EOF
 
 buildBjam()
 {
-    # build boost's jam (which is hidden in the depth of the boost tree)
+    # build boost's jam (which is hidden in the depths of the boost tree)
     echo Build bjam
     cd $BOOST_SRC
     (
@@ -79,7 +96,7 @@ buildBjam()
 
 inventMissingHeaders()
 {
-    # These files are missing in the ARM SDK, but they are in the simulator.
+    # These files are missing in the ARM iPhoneOS SDK, but they are in the simulator.
     # They are supported on the device
     echo Invent missing headers
     cp /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator${IPHONE_SDKVERSION}.sdk/usr/include/{crt_externs,bzlib}.h $BUILDDIR
@@ -128,9 +145,13 @@ buildBoost()
     export LD="$IPHONE_PLATFORM/usr/bin/ld"
     export STRIP="$IPHONE_PLATFORM/usr/bin/strip"
 
+    BOOST_LIBS_CONFIG=""
+    for i in $BOOST_LIBS; do BOOST_LIBS_CONFIG="$BOOST_LIBS_CONFIG --with-$i"; done;
+
     echo
     echo "Building boost..."
-    echo Using BOOST_LIBS:    $BOOST_LIBS
+    echo "Using BOOST_LIBS:        $BOOST_LIBS"
+    echo "Using BOOST_LIBS_CONFIG: $BOOST_LIBS_CONFIG"
 
     PATH=$BUILDDIR/local-bin:$PATH
 
@@ -145,10 +166,16 @@ buildBoost()
         --layout=system \
         --build-dir=$BUILDDIR \
         --user-config=$BUILDDIR/user-config.jam \
-        $BOOST_LIBS \
+        $BOOST_LIBS_CONFIG \
         $BOOST_EXTRACONFIG \
         install \
       || abort "Boost build failed"
+
+    echo "Link all libraries together into a monolith"
+    BOOST_LIB_FILES=""
+    for i in $BOOST_LIBS; do BOOST_LIB_FILES="$BOOST_LIB_FILES $BUILDDIR/boost/bin.v2/libs/$i/build/darwin-4.2.1~iphone*/release/architecture-$BOOST_ARCH/link-static/macosx-version-$BOOST_MACOSVERSION/target-os-iphone/threading-multi/libboost_$i.a"; done;
+    echo "Files are: $BOOST_LIB_FILES"
+    $AR rc $BUILDDIR/libboost-$BOOST_ARCH.a $BOOST_LIB_FILES 
 }
 
 buildBoostForiPhoneOS()
@@ -175,6 +202,7 @@ buildBoostForiPhoneSimulator()
 
 #================================================================================
 
+# $1: Name of a boost library to lipoficate (technical term)
 lipoficate()
 {
     : ${1:?}
@@ -192,14 +220,10 @@ lipoficate()
     || abort "Lipo $1 failed"
 }
 
+# This creates universal versions of each individual boost library
 lipoAllBoostLibraries()
 {
-    lipoficate filesystem
-    lipoficate thread
-    lipoficate signals
-    lipoficate regex
-    lipoficate program_options
-    lipoficate system
+    for i in $BOOST_LIBS; do lipoficate $i; done;
 }
 
 #================================================================================
@@ -213,31 +237,36 @@ lipoAllBoostLibraries()
 
 buildFramework()
 {
-    FRAMEWORK_DIR=$FRAMEWORK_BUILD_DIR/$FRAMEWORK_NAME.framework
+    FRAMEWORK_BUNDLE=$FRAMEWORKDIR/$FRAMEWORK_NAME.framework
 
     echo "Framework: Setting up directories..."
-    mkdir -p $FRAMEWORK_DIR
-    mkdir -p $FRAMEWORK_DIR/Versions
-    mkdir -p $FRAMEWORK_DIR/Versions/$FRAMEWORK_VERSION
-    mkdir -p $FRAMEWORK_DIR/Versions/$FRAMEWORK_VERSION/Resources
-    mkdir -p $FRAMEWORK_DIR/Versions/$FRAMEWORK_VERSION/Headers
-    mkdir -p $FRAMEWORK_DIR/Versions/$FRAMEWORK_VERSION/Documentation
+    mkdir -p $FRAMEWORK_BUNDLE
+    mkdir -p $FRAMEWORK_BUNDLE/Versions
+    mkdir -p $FRAMEWORK_BUNDLE/Versions/$FRAMEWORK_VERSION
+    mkdir -p $FRAMEWORK_BUNDLE/Versions/$FRAMEWORK_VERSION/Resources
+    mkdir -p $FRAMEWORK_BUNDLE/Versions/$FRAMEWORK_VERSION/Headers
+    mkdir -p $FRAMEWORK_BUNDLE/Versions/$FRAMEWORK_VERSION/Documentation
 
     echo "Framework: Creating symlinks..."
-    ln -s $FRAMEWORK_VERSION               $FRAMEWORK_DIR/Versions/Current
-    ln -s Versions/Current/Headers         $FRAMEWORK_DIR/Headers
-    ln -s Versions/Current/Resources       $FRAMEWORK_DIR/Resources
-    ln -s Versions/Current/Documentation   $FRAMEWORK_DIR/Documentation
-    ln -s Versions/Current/$FRAMEWORK_NAME $FRAMEWORK_DIR/$FRAMEWORK_NAME
+    ln -s $FRAMEWORK_VERSION               $FRAMEWORK_BUNDLE/Versions/Current
+    ln -s Versions/Current/Headers         $FRAMEWORK_BUNDLE/Headers
+    ln -s Versions/Current/Resources       $FRAMEWORK_BUNDLE/Resources
+    ln -s Versions/Current/Documentation   $FRAMEWORK_BUNDLE/Documentation
+    ln -s Versions/Current/$FRAMEWORK_NAME $FRAMEWORK_BUNDLE/$FRAMEWORK_NAME
 
-    FRAMEWORK_INSTALL_NAME=$FRAMEWORK_DIR/Versions/$FRAMEWORK_VERSION/$FRAMEWORK_NAME
+    FRAMEWORK_INSTALL_NAME=$FRAMEWORK_BUNDLE/Versions/$FRAMEWORK_VERSION/$FRAMEWORK_NAME
 
-    cp $PREFIXDIR/lib/libboost-filesystem.a "$FRAMEWORK_INSTALL_NAME"
+    lipo \
+        -create \
+        -arch armv6 "$BUILDDIR/libboost-arm.a" \
+        -arch i386  "$BUILDDIR/libboost-x86.a" \
+        -o          "$FRAMEWORK_INSTALL_NAME" \
+    || abort "Lipo $1 failed"
 
     echo "Framework: Copying includes..."
-    cp -r $PREFIXDIR/include/boost/*  $FRAMEWORK_DIR/Headers/
+    cp -r $PREFIXDIR/include/boost/*  $FRAMEWORK_BUNDLE/Headers/
     echo "Framework: Creating plist..."
-    cat > $FRAMEWORK_DIR/Resources/Info.plist <<EOF
+    cat > $FRAMEWORK_BUNDLE/Resources/Info.plist <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -265,16 +294,12 @@ EOF
 # Execution starts here
 #================================================================================
 
-echo "Tarball is:  $BOOST_TARBALL"
-echo "Source is:   $BOOST_SRC"
-echo "BUILDDIR is: $BUILDDIR"
-echo
-
 [ -f "$BOOST_TARBALL" ] || abort "Source tarball missing."
 
 mkdir -p $BUILDDIR
 echo Unpacking boost...
 [ -d $BOOST_SRC ] || tar xfj $BOOST_TARBALL
+
 writeBjamUserConfig
 buildBjam
 inventMissingHeaders
