@@ -6,18 +6,86 @@
 	objectVersion = 45;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C16C814F10D0625500E55D60 /* allocate_shared_esft_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C16C810E10D0622C00E55D60 /* allocate_shared_esft_test.cpp */; };
+		C16C818E10D0628000E55D60 /* Boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C16C60E110D05A0D00E55D60 /* Boost.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Boost-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Boost-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		C16C60E110D05A0D00E55D60 /* Boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Boost.framework; path = /Users/pete/Work/Temp/boostScript/framework/Boost.framework; sourceTree = "<absolute>"; };
+		C16C810E10D0622C00E55D60 /* allocate_shared_esft_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = allocate_shared_esft_test.cpp; sourceTree = "<group>"; };
+		C16C810F10D0622C00E55D60 /* allocate_shared_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = allocate_shared_test.cpp; sourceTree = "<group>"; };
+		C16C811010D0622C00E55D60 /* atomic_count_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = atomic_count_test.cpp; sourceTree = "<group>"; };
+		C16C811110D0622C00E55D60 /* atomic_count_test2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = atomic_count_test2.cpp; sourceTree = "<group>"; };
+		C16C811310D0622C00E55D60 /* auto_ptr_rv_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = auto_ptr_rv_test.cpp; sourceTree = "<group>"; };
+		C16C811410D0622C00E55D60 /* collector_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = collector_test.cpp; sourceTree = "<group>"; };
+		C16C811510D0622C00E55D60 /* esft_constructor_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = esft_constructor_test.cpp; sourceTree = "<group>"; };
+		C16C811610D0622C00E55D60 /* esft_regtest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = esft_regtest.cpp; sourceTree = "<group>"; };
+		C16C811710D0622C00E55D60 /* esft_second_ptr_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = esft_second_ptr_test.cpp; sourceTree = "<group>"; };
+		C16C811810D0622C00E55D60 /* esft_void_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = esft_void_test.cpp; sourceTree = "<group>"; };
+		C16C811910D0622C00E55D60 /* get_deleter_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = get_deleter_test.cpp; sourceTree = "<group>"; };
+		C16C811A10D0622C00E55D60 /* intrusive_ptr_move_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = intrusive_ptr_move_test.cpp; sourceTree = "<group>"; };
+		C16C811B10D0622C00E55D60 /* intrusive_ptr_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = intrusive_ptr_test.cpp; sourceTree = "<group>"; };
+		C16C811C10D0622C00E55D60 /* ip_convertible_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ip_convertible_test.cpp; sourceTree = "<group>"; };
+		C16C811D10D0622C00E55D60 /* lw_mutex_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = lw_mutex_test.cpp; sourceTree = "<group>"; };
+		C16C811E10D0622C00E55D60 /* make_shared_esft_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = make_shared_esft_test.cpp; sourceTree = "<group>"; };
+		C16C811F10D0622C00E55D60 /* make_shared_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = make_shared_test.cpp; sourceTree = "<group>"; };
+		C16C812010D0622C00E55D60 /* pointer_cast_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pointer_cast_test.cpp; sourceTree = "<group>"; };
+		C16C812110D0622C00E55D60 /* pointer_to_other_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = pointer_to_other_test.cpp; sourceTree = "<group>"; };
+		C16C812410D0622C00E55D60 /* shared_from_this_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shared_from_this_test.cpp; sourceTree = "<group>"; };
+		C16C812510D0622C00E55D60 /* shared_ptr_alias_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shared_ptr_alias_test.cpp; sourceTree = "<group>"; };
+		C16C812610D0622C00E55D60 /* shared_ptr_alloc_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shared_ptr_alloc_test.cpp; sourceTree = "<group>"; };
+		C16C812710D0622C00E55D60 /* shared_ptr_alloc2_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shared_ptr_alloc2_test.cpp; sourceTree = "<group>"; };
+		C16C812910D0622C00E55D60 /* shared_ptr_basic_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shared_ptr_basic_test.cpp; sourceTree = "<group>"; };
+		C16C812C10D0622C00E55D60 /* shared_ptr_move_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shared_ptr_move_test.cpp; sourceTree = "<group>"; };
+		C16C812D10D0622C00E55D60 /* shared_ptr_mt_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shared_ptr_mt_test.cpp; sourceTree = "<group>"; };
+		C16C812F10D0622C00E55D60 /* shared_ptr_rv_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shared_ptr_rv_test.cpp; sourceTree = "<group>"; };
+		C16C813010D0622C00E55D60 /* shared_ptr_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shared_ptr_test.cpp; sourceTree = "<group>"; };
+		C16C813110D0622C00E55D60 /* shared_ptr_timing_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = shared_ptr_timing_test.cpp; sourceTree = "<group>"; };
+		C16C813210D0622C00E55D60 /* smart_ptr_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = smart_ptr_test.cpp; sourceTree = "<group>"; };
+		C16C813310D0622C00E55D60 /* sp_atomic_mt_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sp_atomic_mt_test.cpp; sourceTree = "<group>"; };
+		C16C813410D0622C00E55D60 /* sp_atomic_mt2_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sp_atomic_mt2_test.cpp; sourceTree = "<group>"; };
+		C16C813510D0622C00E55D60 /* sp_atomic_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sp_atomic_test.cpp; sourceTree = "<group>"; };
+		C16C813610D0622C00E55D60 /* sp_convertible_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sp_convertible_test.cpp; sourceTree = "<group>"; };
+		C16C813710D0622C00E55D60 /* sp_recursive_assign_rv_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sp_recursive_assign_rv_test.cpp; sourceTree = "<group>"; };
+		C16C813810D0622C00E55D60 /* sp_recursive_assign_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sp_recursive_assign_test.cpp; sourceTree = "<group>"; };
+		C16C813910D0622C00E55D60 /* sp_recursive_assign2_rv_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sp_recursive_assign2_rv_test.cpp; sourceTree = "<group>"; };
+		C16C813A10D0622C00E55D60 /* sp_recursive_assign2_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sp_recursive_assign2_test.cpp; sourceTree = "<group>"; };
+		C16C813B10D0622C00E55D60 /* sp_unary_addr_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sp_unary_addr_test.cpp; sourceTree = "<group>"; };
+		C16C813C10D0622C00E55D60 /* spinlock_pool_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spinlock_pool_test.cpp; sourceTree = "<group>"; };
+		C16C813D10D0622C00E55D60 /* spinlock_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spinlock_test.cpp; sourceTree = "<group>"; };
+		C16C813E10D0622C00E55D60 /* spinlock_try_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = spinlock_try_test.cpp; sourceTree = "<group>"; };
+		C16C813F10D0622C00E55D60 /* weak_ptr_move_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = weak_ptr_move_test.cpp; sourceTree = "<group>"; };
+		C16C814010D0622C00E55D60 /* weak_ptr_mt_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = weak_ptr_mt_test.cpp; sourceTree = "<group>"; };
+		C16C814110D0622C00E55D60 /* weak_ptr_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = weak_ptr_test.cpp; sourceTree = "<group>"; };
+		C16C814210D0622C00E55D60 /* weak_ptr_timing_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = weak_ptr_timing_test.cpp; sourceTree = "<group>"; };
+		C16C814310D0622C00E55D60 /* wp_convertible_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wp_convertible_test.cpp; sourceTree = "<group>"; };
+		C16C814410D0622C00E55D60 /* yield_k_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = yield_k_test.cpp; sourceTree = "<group>"; };
+		C16C814910D0624400E55D60 /* smart_ptr_tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smart_ptr_tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C16C814B10D0624400E55D60 /* smart_ptr_tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "smart_ptr_tests-Info.plist"; sourceTree = "<group>"; };
+		C16C81A310D0636E00E55D60 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C16C814710D0624400E55D60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C16C818E10D0628000E55D60 /* Boost.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				C16C814910D0624400E55D60 /* smart_ptr_tests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -25,7 +93,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97315FDCFA39411CA2CEA /* smart_ptr test */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -33,17 +101,68 @@
 			name = CustomTemplate;
 			sourceTree = "<group>";
 		};
-		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+		29B97315FDCFA39411CA2CEA /* smart_ptr test */ = {
 			isa = PBXGroup;
 			children = (
+				C16C810E10D0622C00E55D60 /* allocate_shared_esft_test.cpp */,
+				C16C810F10D0622C00E55D60 /* allocate_shared_test.cpp */,
+				C16C811010D0622C00E55D60 /* atomic_count_test.cpp */,
+				C16C811110D0622C00E55D60 /* atomic_count_test2.cpp */,
+				C16C811310D0622C00E55D60 /* auto_ptr_rv_test.cpp */,
+				C16C811410D0622C00E55D60 /* collector_test.cpp */,
+				C16C811510D0622C00E55D60 /* esft_constructor_test.cpp */,
+				C16C811610D0622C00E55D60 /* esft_regtest.cpp */,
+				C16C811710D0622C00E55D60 /* esft_second_ptr_test.cpp */,
+				C16C811810D0622C00E55D60 /* esft_void_test.cpp */,
+				C16C811910D0622C00E55D60 /* get_deleter_test.cpp */,
+				C16C811A10D0622C00E55D60 /* intrusive_ptr_move_test.cpp */,
+				C16C811B10D0622C00E55D60 /* intrusive_ptr_test.cpp */,
+				C16C811C10D0622C00E55D60 /* ip_convertible_test.cpp */,
+				C16C811D10D0622C00E55D60 /* lw_mutex_test.cpp */,
+				C16C811E10D0622C00E55D60 /* make_shared_esft_test.cpp */,
+				C16C811F10D0622C00E55D60 /* make_shared_test.cpp */,
+				C16C812010D0622C00E55D60 /* pointer_cast_test.cpp */,
+				C16C812110D0622C00E55D60 /* pointer_to_other_test.cpp */,
+				C16C812410D0622C00E55D60 /* shared_from_this_test.cpp */,
+				C16C812510D0622C00E55D60 /* shared_ptr_alias_test.cpp */,
+				C16C812610D0622C00E55D60 /* shared_ptr_alloc_test.cpp */,
+				C16C812710D0622C00E55D60 /* shared_ptr_alloc2_test.cpp */,
+				C16C812910D0622C00E55D60 /* shared_ptr_basic_test.cpp */,
+				C16C812C10D0622C00E55D60 /* shared_ptr_move_test.cpp */,
+				C16C812D10D0622C00E55D60 /* shared_ptr_mt_test.cpp */,
+				C16C812F10D0622C00E55D60 /* shared_ptr_rv_test.cpp */,
+				C16C813010D0622C00E55D60 /* shared_ptr_test.cpp */,
+				C16C813110D0622C00E55D60 /* shared_ptr_timing_test.cpp */,
+				C16C813210D0622C00E55D60 /* smart_ptr_test.cpp */,
+				C16C813310D0622C00E55D60 /* sp_atomic_mt_test.cpp */,
+				C16C813410D0622C00E55D60 /* sp_atomic_mt2_test.cpp */,
+				C16C813510D0622C00E55D60 /* sp_atomic_test.cpp */,
+				C16C813610D0622C00E55D60 /* sp_convertible_test.cpp */,
+				C16C813710D0622C00E55D60 /* sp_recursive_assign_rv_test.cpp */,
+				C16C813810D0622C00E55D60 /* sp_recursive_assign_test.cpp */,
+				C16C813910D0622C00E55D60 /* sp_recursive_assign2_rv_test.cpp */,
+				C16C813A10D0622C00E55D60 /* sp_recursive_assign2_test.cpp */,
+				C16C813B10D0622C00E55D60 /* sp_unary_addr_test.cpp */,
+				C16C813C10D0622C00E55D60 /* spinlock_pool_test.cpp */,
+				C16C813D10D0622C00E55D60 /* spinlock_test.cpp */,
+				C16C813E10D0622C00E55D60 /* spinlock_try_test.cpp */,
+				C16C813F10D0622C00E55D60 /* weak_ptr_move_test.cpp */,
+				C16C814010D0622C00E55D60 /* weak_ptr_mt_test.cpp */,
+				C16C814110D0622C00E55D60 /* weak_ptr_test.cpp */,
+				C16C814210D0622C00E55D60 /* weak_ptr_timing_test.cpp */,
+				C16C814310D0622C00E55D60 /* wp_convertible_test.cpp */,
+				C16C814410D0622C00E55D60 /* yield_k_test.cpp */,
 			);
-			name = "Other Sources";
+			name = "smart_ptr test";
+			path = ../boost_1_41_0/libs/smart_ptr/test;
 			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				8D1107310486CEB800E47090 /* Boost-Info.plist */,
+				C16C814B10D0624400E55D60 /* smart_ptr_tests-Info.plist */,
+				C16C81A310D0636E00E55D60 /* main.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -61,6 +180,26 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXNativeTarget section */
+		C16C814810D0624400E55D60 /* smart_ptr_tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C16C814E10D0624600E55D60 /* Build configuration list for PBXNativeTarget "smart_ptr_tests" */;
+			buildPhases = (
+				C16C814510D0624400E55D60 /* Resources */,
+				C16C814610D0624400E55D60 /* Sources */,
+				C16C814710D0624400E55D60 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = smart_ptr_tests;
+			productName = smart_ptr_tests;
+			productReference = C16C814910D0624400E55D60 /* smart_ptr_tests.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
 /* Begin PBXProject section */
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
@@ -71,9 +210,31 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				C16C814810D0624400E55D60 /* smart_ptr_tests */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C16C814510D0624400E55D60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C16C814610D0624400E55D60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C16C814F10D0625500E55D60 /* allocate_shared_esft_test.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		C01FCF4F08A954540054247B /* Debug */ = {
@@ -102,6 +263,63 @@
 			};
 			name = Release;
 		};
+		C16C814C10D0624600E55D60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../framework\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "smart_ptr_tests-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = smart_ptr_tests;
+				SDKROOT = iphoneos3.1.2;
+			};
+			name = Debug;
+		};
+		C16C814D10D0624600E55D60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../framework\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "smart_ptr_tests-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = smart_ptr_tests;
+				SDKROOT = iphoneos3.1.2;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -110,6 +328,15 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C16C814E10D0624600E55D60 /* Build configuration list for PBXNativeTarget "smart_ptr_tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C16C814C10D0624600E55D60 /* Debug */,
+				C16C814D10D0624600E55D60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
