@@ -1,9 +1,9 @@
-#================================================================================
+#===============================================================================
 # Filename:  boost.sh
 # Author:    Pete Goodliffe
 # Copyright: (c) Copyright 2009 Pete Goodliffe
 # Licence:   Please feel free to use this, with attribution
-#================================================================================
+#===============================================================================
 #
 # Builds a Boost framework for the iPhone.
 # Creates a set of universal libraries that can be used on an iPhone and in the
@@ -17,7 +17,7 @@
 #
 # Then go get the source tar.bz of the boost you want to build, shove it in the
 # same directory as this script, and run "./boost.sh". Grab a cuppa. And voila.
-#================================================================================
+#===============================================================================
 
 : ${BOOST_VERSION:=1_41_0}
 : ${BOOST_LIBS:="thread signals filesystem regex program_options system"}
@@ -30,7 +30,7 @@
 BOOST_TARBALL=boost_$BOOST_VERSION.tar.bz2
     BOOST_SRC=boost_${BOOST_VERSION}
 
-#================================================================================
+#===============================================================================
 
 echo "BOOST_VERSION:     $BOOST_VERSION"
 echo "BOOST_LIBS:        $BOOST_LIBS"
@@ -42,9 +42,9 @@ echo "FRAMEWORKDIR:      $FRAMEWORKDIR"
 echo "IPHONE_SDKVERSION: $IPHONE_SDKVERSION"
 echo
 
-#================================================================================
+#===============================================================================
 # Functions
-#================================================================================
+#===============================================================================
 
 abort()
 {
@@ -53,7 +53,7 @@ abort()
     exit 1
 }
 
-#================================================================================
+#===============================================================================
 
 buildBjam()
 {
@@ -70,7 +70,7 @@ buildBjam()
     ) || abort "Build jam failed"
 }
 
-#================================================================================
+#===============================================================================
 
 writeBjamUserConfig()
 {
@@ -93,7 +93,7 @@ using darwin : 4.2.1~iphonesim
 EOF
 }
 
-#================================================================================
+#===============================================================================
 
 inventMissingHeaders()
 {
@@ -104,7 +104,7 @@ inventMissingHeaders()
     cp /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator${IPHONE_SDKVERSION}.sdk/usr/include/{crt_externs,bzlib}.h $BUILDDIR
 }
 
-#================================================================================
+#===============================================================================
 
 # Called from buildBoostForiPhoneOS and buildBoostForiPhoneSimulator
 #
@@ -176,9 +176,6 @@ buildBoost()
     echo "Link all libraries together into a monolith"
     BOOST_LIB_FILES=""
     for i in $BOOST_LIBS; do BOOST_LIB_FILES="$BOOST_LIB_FILES $BUILDDIR/boost/bin.v2/libs/$i/build/darwin-4.2.1~iphone*/release/architecture-$BOOST_ARCH/link-static/macosx-version-$BOOST_MACOSVERSION/target-os-iphone/threading-multi/libboost_$i.a"; done;
-    echo "Files are: $AR rc $BUILDDIR/libboost-$BOOST_ARCH.a $BOOST_LIB_FILES"
-        echo
-        echo
     $LD -all_load -arch $IPHONE_ARCH -r -o $BUILDDIR/libboost-$BOOST_ARCH.a $BOOST_LIB_FILES
 }
 
@@ -204,7 +201,7 @@ buildBoostForiPhoneSimulator()
     buildBoost
 }
 
-#================================================================================
+#===============================================================================
 
 # $1: Name of a boost library to lipoficate (technical term)
 lipoficate()
@@ -230,7 +227,7 @@ lipoAllBoostLibraries()
     for i in $BOOST_LIBS; do lipoficate $i; done;
 }
 
-#================================================================================
+#===============================================================================
 
                     VERSION_TYPE=Alpha
                   FRAMEWORK_NAME=Boost
@@ -296,9 +293,9 @@ buildFramework()
 EOF
 }
 
-#================================================================================
+#===============================================================================
 # Execution starts here
-#================================================================================
+#===============================================================================
 
 [ -f "$BOOST_TARBALL" ] || abort "Source tarball missing."
 
@@ -316,5 +313,5 @@ buildFramework
 
 echo "Completed successfully"
 
-#================================================================================
+#===============================================================================
 
