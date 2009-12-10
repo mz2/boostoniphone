@@ -174,8 +174,10 @@ buildBoost()
     echo "Link all libraries together into a monolith"
     BOOST_LIB_FILES=""
     for i in $BOOST_LIBS; do BOOST_LIB_FILES="$BOOST_LIB_FILES $BUILDDIR/boost/bin.v2/libs/$i/build/darwin-4.2.1~iphone*/release/architecture-$BOOST_ARCH/link-static/macosx-version-$BOOST_MACOSVERSION/target-os-iphone/threading-multi/libboost_$i.a"; done;
-    echo "Files are: $BOOST_LIB_FILES"
-    $AR rc $BUILDDIR/libboost-$BOOST_ARCH.a $BOOST_LIB_FILES 
+    echo "Files are: $AR rc $BUILDDIR/libboost-$BOOST_ARCH.a $BOOST_LIB_FILES"
+        echo
+        echo
+    $LD -all_load -arch $IPHONE_ARCH -r -o $BUILDDIR/libboost-$BOOST_ARCH.a $BOOST_LIB_FILES
 }
 
 buildBoostForiPhoneOS()
@@ -238,6 +240,8 @@ lipoAllBoostLibraries()
 buildFramework()
 {
     FRAMEWORK_BUNDLE=$FRAMEWORKDIR/$FRAMEWORK_NAME.framework
+
+    rm -rf $FRAMEWORK_BUNDLE
 
     echo "Framework: Setting up directories..."
     mkdir -p $FRAMEWORK_BUNDLE
