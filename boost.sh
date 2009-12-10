@@ -2,12 +2,13 @@
 # Filename:  boost.sh
 # Author:    Pete Goodliffe
 # Copyright: (c) Copyright 2009 Pete Goodliffe
-# Licence:   Please use this freely, with attribution
+# Licence:   Please feel free to use this, with attribution
 #================================================================================
 #
 # Builds a Boost framework for the iPhone.
 # Creates a set of universal libraries that can be used on an iPhone and in the
-# iPhone simulator.
+# iPhone simulator. Then creates a pseudo-framework to make using boost in Xcode
+# less painful.
 #
 # To configure the script, define:
 #    BOOST_LIBS:        which libraries to build
@@ -15,7 +16,7 @@
 #    IPHONE_SDKVERSION: iPhone SDK version (e.g. 3.0)
 #
 # Then go get the source tar.bz of the boost you want to build, shove it in the
-# same directory as this script, and run "./boost.sh"> Grab a cuppa. And voila.
+# same directory as this script, and run "./boost.sh". Grab a cuppa. And voila.
 #================================================================================
 
 : ${BOOST_VERSION:=1_41_0}
@@ -27,7 +28,7 @@
 : ${FRAMEWORKDIR:=`pwd`/framework}
 
 BOOST_TARBALL=boost_$BOOST_VERSION.tar.bz2
-BOOST_SRC=boost_${BOOST_VERSION}
+    BOOST_SRC=boost_${BOOST_VERSION}
 
 #================================================================================
 
@@ -50,29 +51,6 @@ abort()
     echo
     echo "Aborted: $@"
     exit 1
-    exec false
-}
-
-#================================================================================
-
-writeBjamUserConfig()
-{
-    echo Writing usr-config
-    mkdir -p $BUILDDIR
-    cat > $BUILDDIR/user-config.jam <<EOF
-using darwin : 4.2.1~iphone
-   :
-/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -arch armv6
-   : <striper>
-   : <architecture>arm <target-os>iphone <macosx-version>iphone-3.0
-   ;
-using darwin : 4.2.1~iphonesim
-   :
-/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386
-   : <striper>
-   : <architecture>x86 <target-os>iphone <macosx-version>iphonesim-3.0
-   ; 
-EOF
 }
 
 #================================================================================
@@ -94,10 +72,34 @@ buildBjam()
 
 #================================================================================
 
+writeBjamUserConfig()
+{
+    # You need to do this to point bjam at the right compiler
+    echo Writing usr-config
+    mkdir -p $BUILDDIR
+    cat > $BUILDDIR/user-config.jam <<EOF
+using darwin : 4.2.1~iphone
+   :
+/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -arch armv6
+   : <striper>
+   : <architecture>arm <target-os>iphone <macosx-version>iphone-3.0
+   ;
+using darwin : 4.2.1~iphonesim
+   :
+/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386
+   : <striper>
+   : <architecture>x86 <target-os>iphone <macosx-version>iphonesim-3.0
+   ; 
+EOF
+}
+
+#================================================================================
+
 inventMissingHeaders()
 {
     # These files are missing in the ARM iPhoneOS SDK, but they are in the simulator.
-    # They are supported on the device
+    # They are supported on the device, so we copy them from x86 SDK to a staging area
+    # to use them on ARM, too.
     echo Invent missing headers
     cp /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator${IPHONE_SDKVERSION}.sdk/usr/include/{crt_externs,bzlib}.h $BUILDDIR
 }
