@@ -82,13 +82,13 @@ using darwin : 4.2.1~iphone
    :
 /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -arch armv6
    : <striper>
-   : <architecture>arm <target-os>iphone <macosx-version>iphone-3.0
+   : <architecture>arm <target-os>iphone <macosx-version>iphone-$IPHONE_SDKVERSION
    ;
 using darwin : 4.2.1~iphonesim
    :
 /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386
    : <striper>
-   : <architecture>x86 <target-os>iphone <macosx-version>iphonesim-3.0
+   : <architecture>x86 <target-os>iphone <macosx-version>iphonesim-$IPHONE_SDKVERSION
    ; 
 EOF
 }
@@ -186,7 +186,7 @@ buildBoostForiPhoneOS()
     IPHONE_ARCH=armv6
     BOOST_ARCH=arm
     BOOST_EXTRACONFIG="define=_LITTLE_ENDIAN include=$BUILDDIR"
-    BOOST_MACOSVERSION=iphone-3.0
+    BOOST_MACOSVERSION=iphone-$IPHONE_SDKVERSION
     buildBoost
 }
 
@@ -197,7 +197,7 @@ buildBoostForiPhoneSimulator()
     IPHONE_ARCH=i386
     BOOST_ARCH=x86
     BOOST_EXTRACONFIG=
-    BOOST_MACOSVERSION=iphonesim-3.0
+    BOOST_MACOSVERSION=iphonesim-$IPHONE_SDKVERSION
     buildBoost
 }
 
