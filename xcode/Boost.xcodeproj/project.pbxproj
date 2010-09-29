@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C145A39D12538039007045D5 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C16C60E110D05A0D00E55D60 /* boost.framework */; };
 		C16C814F10D0625500E55D60 /* allocate_shared_esft_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C16C810E10D0622C00E55D60 /* allocate_shared_esft_test.cpp */; };
-		C16C818E10D0628000E55D60 /* Boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C16C60E110D05A0D00E55D60 /* Boost.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,7 +16,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Boost-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Boost-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
-		C16C60E110D05A0D00E55D60 /* Boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Boost.framework; path = /Users/pete/Work/Temp/boostScript/framework/Boost.framework; sourceTree = "<absolute>"; };
+		C16C60E110D05A0D00E55D60 /* boost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = boost.framework; path = ../framework/boost.framework; sourceTree = SOURCE_ROOT; };
 		C16C810E10D0622C00E55D60 /* allocate_shared_esft_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = allocate_shared_esft_test.cpp; sourceTree = "<group>"; };
 		C16C810F10D0622C00E55D60 /* allocate_shared_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = allocate_shared_test.cpp; sourceTree = "<group>"; };
 		C16C811010D0622C00E55D60 /* atomic_count_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = atomic_count_test.cpp; sourceTree = "<group>"; };
@@ -67,7 +67,6 @@
 		C16C814410D0622C00E55D60 /* yield_k_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = yield_k_test.cpp; sourceTree = "<group>"; };
 		C16C814910D0624400E55D60 /* smart_ptr_tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smart_ptr_tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C16C814B10D0624400E55D60 /* smart_ptr_tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "smart_ptr_tests-Info.plist"; sourceTree = "<group>"; };
-		C16C81A310D0636E00E55D60 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C16C818E10D0628000E55D60 /* Boost.framework in Frameworks */,
+				C145A39D12538039007045D5 /* boost.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +92,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				29B97315FDCFA39411CA2CEA /* smart_ptr test */,
+				29B97315FDCFA39411CA2CEA /* test */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
@@ -101,7 +100,7 @@
 			name = CustomTemplate;
 			sourceTree = "<group>";
 		};
-		29B97315FDCFA39411CA2CEA /* smart_ptr test */ = {
+		29B97315FDCFA39411CA2CEA /* test */ = {
 			isa = PBXGroup;
 			children = (
 				C16C810E10D0622C00E55D60 /* allocate_shared_esft_test.cpp */,
@@ -153,8 +152,8 @@
 				C16C814310D0622C00E55D60 /* wp_convertible_test.cpp */,
 				C16C814410D0622C00E55D60 /* yield_k_test.cpp */,
 			);
-			name = "smart_ptr test";
-			path = ../boost_1_41_0/libs/smart_ptr/test;
+			name = test;
+			path = ../src/boost_1_44_0/libs/smart_ptr/test;
 			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
@@ -162,7 +161,6 @@
 			children = (
 				8D1107310486CEB800E47090 /* Boost-Info.plist */,
 				C16C814B10D0624400E55D60 /* smart_ptr_tests-Info.plist */,
-				C16C81A310D0636E00E55D60 /* main.cpp */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -173,7 +171,7 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
-				C16C60E110D05A0D00E55D60 /* Boost.framework */,
+				C16C60E110D05A0D00E55D60 /* boost.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -205,7 +203,14 @@
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Boost" */;
 			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -246,7 +251,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.1.2;
+				SDKROOT = iphoneos4.2;
 			};
 			name = Debug;
 		};
@@ -259,7 +264,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos3.1.2;
+				SDKROOT = iphoneos4.2;
 			};
 			name = Release;
 		};
@@ -272,6 +277,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../framework\"",
+					"\"$(SRCROOT)/../../../../Temp/boostScript/framework\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -279,6 +285,13 @@
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "smart_ptr_tests-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../framework/boost.framework\"",
+					"\"$(SRCROOT)/../framework\"",
+					"\"$(SRCROOT)/../build/armv7\"",
+					"\"$(SRCROOT)/../build/armv6\"",
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -287,7 +300,6 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = smart_ptr_tests;
-				SDKROOT = iphoneos3.1.2;
 			};
 			name = Debug;
 		};
@@ -301,12 +313,20 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../framework\"",
+					"\"$(SRCROOT)/../../../../Temp/boostScript/framework\"",
 				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = "smart_ptr_tests-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../framework/boost.framework\"",
+					"\"$(SRCROOT)/../framework\"",
+					"\"$(SRCROOT)/../build/armv7\"",
+					"\"$(SRCROOT)/../build/armv6\"",
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -315,7 +335,6 @@
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = smart_ptr_tests;
-				SDKROOT = iphoneos3.1.2;
 				ZERO_LINK = NO;
 			};
 			name = Release;
