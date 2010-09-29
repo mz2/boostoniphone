@@ -99,8 +99,8 @@ writeBjamUserConfig()
     # ONLY SEEMS TO WORK IN HOME DIR GRR
     echo Writing usr-config
     #mkdir -p $BUILDDIR
-    #cat >> $BOOST_SRC/tools/build/v2/user-config.jam <<EOF
-    cat > ~/user-config.jam <<EOF
+    #cat > ~/user-config.jam <<EOF
+    cat >> $BOOST_SRC/tools/build/v2/user-config.jam <<EOF
 using darwin : 4.2.1~iphone
    : /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -arch armv7 -mthumb -fvisibility=hidden -fvisibility-inlines-hidden
    : <striper>
