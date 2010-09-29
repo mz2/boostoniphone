@@ -73,6 +73,15 @@ doneSection()
 
 #===============================================================================
 
+cleanEverythingReadyToStart()
+{
+    rm -rf $BOOST_SRC
+    rm -rf $BUILDDIR
+    rm -rf $PREFIXDIR
+    rm -rf $FRAMEWORKDIR
+}
+
+#===============================================================================
 unpackBoost()
 {
     echo Unpacking boost into $SRCDIR...
@@ -261,6 +270,7 @@ mkdir -p $BUILDDIR
 
 case $BOOST_VERSION in
     1_44_0 )
+        #cleanEverythingReadyToStart
         #unpackBoost
         #inventMissingHeaders
         #writeBjamUserConfig
