@@ -201,7 +201,7 @@ scrunchAllLibsTogetherInOneLibPerPlatform()
         cp "$BOOST_SRC/bin.v2/libs/$NAME/build/darwin-4.2.1~iphonesim/release/architecture-x86/link-static/macosx-version-iphonesim-$IPHONE_SDKVERSION/target-os-iphone/threading-multi/libboost_$NAME.a" $BUILDDIR/i386/
     done
 
-    echo "Decomposing each architecture's .a (depressing extra step required, as an ar of several .as doesn't work"
+    echo "Decomposing each architecture's .a files"
     for NAME in $ALL_LIBS; do
         echo Decomposing $NAME...
         (cd $BUILDDIR/armv6/obj; ar -x ../$NAME );
@@ -212,19 +212,11 @@ scrunchAllLibsTogetherInOneLibPerPlatform()
     echo "Linking each architecture into an uberlib ($ALL_LIBS => libboost.a )"
     rm $BUILDDIR/*/libboost.a
     echo ...armv6
-#    (cd $BUILDDIR/armv6; $ARM_DEV_DIR/ar crus libboost.a $ALL_LIBS; )
     (cd $BUILDDIR/armv6; $ARM_DEV_DIR/ar crus libboost.a obj/*.o; )
     echo ...armv7
-#    (cd $BUILDDIR/armv7; $ARM_DEV_DIR/ar crus libboost.a $ALL_LIBS; )
     (cd $BUILDDIR/armv7; $ARM_DEV_DIR/ar crus libboost.a obj/*.o; )
     echo ...i386
-#    (cd $BUILDDIR/i386;  $SIM_DEV_DIR/ar crus libboost.a $ALL_LIBS; )
     (cd $BUILDDIR/i386;  $SIM_DEV_DIR/ar crus libboost.a obj/*.o; )
-
-#echo $ARM_DEV_DIR/g++ -c -o $ARM_COMBINED_LIB $ALL_LIBS_ARM
-#echo $SIM_DEV_DIR/g++ -c -o $SIM_COMBINED_LIB $ALL_LIBS_SIM
-#$ARM_DEV_DIR/ar cru $ARM_COMBINED_LIB $ALL_LIBS_ARM
-#$SIM_DEV_DIR/ar cru $SIM_COMBINED_LIB $ALL_LIBS_SIM
 }
 
 #===============================================================================
@@ -307,14 +299,14 @@ mkdir -p $BUILDDIR
 
 case $BOOST_VERSION in
     1_44_0 )
-        #cleanEverythingReadyToStart
-        #unpackBoost
-        #inventMissingHeaders
-        #writeBjamUserConfig
-        #bootstrapBoost
-        #buildBoostForiPhoneOS_1_44_0
+        cleanEverythingReadyToStart
+        unpackBoost
+        inventMissingHeaders
+        writeBjamUserConfig
+        bootstrapBoost
+        buildBoostForiPhoneOS_1_44_0
         scrunchAllLibsTogetherInOneLibPerPlatform
-        #lipoAllBoostLibraries
+        lipoAllBoostLibraries
         buildFramework
         ;;
     default )
