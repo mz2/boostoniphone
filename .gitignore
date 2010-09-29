@@ -1,4 +1,6 @@
 build
+src
+tmp
 prefix
 boost_1_41_0
 boost_1_41_0.tar.bz2
