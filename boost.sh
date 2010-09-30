@@ -22,6 +22,15 @@
 : ${BOOST_VERSION:=1_44_0}
 : ${BOOST_LIBS:="thread signals filesystem regex program_options system"}
 : ${IPHONE_SDKVERSION:=4.2}
+: ${EXTRA_CPPFLAGS:="-DBOOST_AC_USE_PTHREADS"}
+
+# The EXTRA_CPPFLAGS definition works around a thread race issue in
+# shared_ptr. I encountered this historically and have not verified that
+# the fix is no longer required. Without using the posix thread primitives
+# an invalid compare-and-swap ARM instruction (non-thread-safe) was used for the
+# shared_ptr use count causing nasty and subtle bugs.
+#
+# Should perhaps also consider/use instead: -BOOST_SP_USE_PTHREADS
 
 : ${TARBALLDIR:=`pwd`}
 : ${SRCDIR:=`pwd`/src}
@@ -104,12 +113,12 @@ writeBjamUserConfig()
     #cat > ~/user-config.jam <<EOF
     cat >> $BOOST_SRC/tools/build/v2/user-config.jam <<EOF
 using darwin : 4.2.1~iphone
-   : /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -arch armv7 -mthumb -fvisibility=hidden -fvisibility-inlines-hidden
+   : /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -arch armv7 -mthumb -fvisibility=hidden -fvisibility-inlines-hidden $EXTRA_CPPFLAGS
    : <striper>
    : <architecture>arm <target-os>iphone
    ;
 using darwin : 4.2.1~iphonesim
-   : /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -fvisibility=hidden -fvisibility-inlines-hidden
+   : /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -fvisibility=hidden -fvisibility-inlines-hidden $EXTRA_CPPFLAGS
    : <striper>
    : <architecture>x86 <target-os>iphone
    ;
