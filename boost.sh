@@ -75,10 +75,12 @@ doneSection()
 
 cleanEverythingReadyToStart()
 {
+    echo Cleaning everything before we start to build...
     rm -rf $BOOST_SRC
     rm -rf $BUILDDIR
     rm -rf $PREFIXDIR
     rm -rf $FRAMEWORKDIR
+    doneSection
 }
 
 #===============================================================================
