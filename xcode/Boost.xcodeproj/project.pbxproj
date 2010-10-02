@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C145A39D12538039007045D5 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C16C60E110D05A0D00E55D60 /* boost.framework */; };
 		C16C814F10D0625500E55D60 /* allocate_shared_esft_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C16C810E10D0622C00E55D60 /* allocate_shared_esft_test.cpp */; };
+		C1C1B2B612573BBB00B08D83 /* UsingBoost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1C1B29812573AD400B08D83 /* UsingBoost.cpp */; };
+		C1C1B2B712573BBF00B08D83 /* boost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C16C60E110D05A0D00E55D60 /* boost.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,10 @@
 		C16C814410D0622C00E55D60 /* yield_k_test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = yield_k_test.cpp; sourceTree = "<group>"; };
 		C16C814910D0624400E55D60 /* smart_ptr_tests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = smart_ptr_tests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C16C814B10D0624400E55D60 /* smart_ptr_tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "smart_ptr_tests-Info.plist"; sourceTree = "<group>"; };
+		C1C1B29712573AD400B08D83 /* UsingBoost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsingBoost.h; sourceTree = "<group>"; };
+		C1C1B29812573AD400B08D83 /* UsingBoost.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UsingBoost.cpp; sourceTree = "<group>"; };
+		C1C1B2B012573BB000B08D83 /* Using Boost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Using Boost.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1C1B2B212573BB000B08D83 /* Using Boost-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Using Boost-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C1C1B2AE12573BB000B08D83 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1C1B2B712573BBF00B08D83 /* boost.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -85,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				C16C814910D0624400E55D60 /* smart_ptr_tests.app */,
+				C1C1B2B012573BB000B08D83 /* Using Boost.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,10 +107,12 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				C1C1B29612573AAF00B08D83 /* Using Boost */,
 				29B97315FDCFA39411CA2CEA /* test */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				C1C1B2B212573BB000B08D83 /* Using Boost-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -176,6 +193,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C1C1B29612573AAF00B08D83 /* Using Boost */ = {
+			isa = PBXGroup;
+			children = (
+				C1C1B29712573AD400B08D83 /* UsingBoost.h */,
+				C1C1B29812573AD400B08D83 /* UsingBoost.cpp */,
+			);
+			path = "Using Boost";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,6 +220,23 @@
 			name = smart_ptr_tests;
 			productName = smart_ptr_tests;
 			productReference = C16C814910D0624400E55D60 /* smart_ptr_tests.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C1C1B2AF12573BB000B08D83 /* Using Boost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C1C1B2B512573BB100B08D83 /* Build configuration list for PBXNativeTarget "Using Boost" */;
+			buildPhases = (
+				C1C1B2AC12573BB000B08D83 /* Resources */,
+				C1C1B2AD12573BB000B08D83 /* Sources */,
+				C1C1B2AE12573BB000B08D83 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Using Boost";
+			productName = "Using Boost";
+			productReference = C1C1B2B012573BB000B08D83 /* Using Boost.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -216,12 +259,20 @@
 			projectRoot = "";
 			targets = (
 				C16C814810D0624400E55D60 /* smart_ptr_tests */,
+				C1C1B2AF12573BB000B08D83 /* Using Boost */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C16C814510D0624400E55D60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C1C1B2AC12573BB000B08D83 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -239,6 +290,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C1C1B2AD12573BB000B08D83 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1C1B2B612573BBB00B08D83 /* UsingBoost.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -250,6 +309,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PREBINDING = NO;
 				SDKROOT = iphoneos4.2;
 			};
@@ -339,6 +399,60 @@
 			};
 			name = Release;
 		};
+		C1C1B2B312573BB100B08D83 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../framework\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "";
+				INFOPLIST_FILE = "Using Boost-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Using Boost";
+			};
+			name = Debug;
+		};
+		C1C1B2B412573BB100B08D83 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../framework\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "Using Boost-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Using Boost";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -356,6 +470,15 @@
 			buildConfigurations = (
 				C16C814C10D0624600E55D60 /* Debug */,
 				C16C814D10D0624600E55D60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C1C1B2B512573BB100B08D83 /* Build configuration list for PBXNativeTarget "Using Boost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1C1B2B312573BB100B08D83 /* Debug */,
+				C1C1B2B412573BB100B08D83 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
