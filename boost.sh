@@ -43,8 +43,8 @@ BOOST_TARBALL=$TARBALLDIR/boost_$BOOST_VERSION.tar.bz2
 
 #===============================================================================
 
-ARM_DEV_DIR=/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/
-SIM_DEV_DIR=/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/
+ARM_DEV_DIR="$(xcode-select -print-path)/Platforms/iPhoneOS.platform/Developer/usr/bin/"
+SIM_DEV_DIR="$(xcode-select -print-path)/Platforms/iPhoneSimulator.platform/Developer/usr/bin/"
 
 ARM_COMBINED_LIB=$BUILDDIR/lib_boost_arm.a
 SIM_COMBINED_LIB=$BUILDDIR/lib_boost_x86.a
