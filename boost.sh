@@ -37,14 +37,16 @@
 : ${BUILDDIR:=`pwd`/build}
 : ${PREFIXDIR:=`pwd`/prefix}
 : ${FRAMEWORKDIR:=`pwd`/framework}
+: ${XCODE_ROOT:=`xcode-select -print-path`}
+: ${COMPILER:=clang++}
 
 BOOST_TARBALL=$TARBALLDIR/boost_$BOOST_VERSION.tar.bz2
     BOOST_SRC=$SRCDIR/boost_${BOOST_VERSION}
 
 #===============================================================================
-DEVELOPER_DIR=`xcode-select -print-path`
-ARM_DEV_DIR=$DEVELOPER_DIR/Platforms/iPhoneOS.platform/Developer/usr/bin/
-SIM_DEV_DIR=$DEVELOPER_DIR/Platforms/iPhoneSimulator.platform/Developer/usr/bin/
+
+ARM_DEV_DIR=$XCODE_ROOT/Platforms/iPhoneOS.platform/Developer/usr/bin/
+SIM_DEV_DIR=$XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer/usr/bin/
 
 ARM_COMBINED_LIB=$BUILDDIR/lib_boost_arm.a
 SIM_COMBINED_LIB=$BUILDDIR/lib_boost_x86.a
@@ -80,18 +82,7 @@ doneSection()
     echo
 }
 
-downloadBoost1_49_0()
-{
-    if [ ! -s $TARBALLDIR/boost_1_49_0.tar.bz2 ]; then
-        echo "Downloading boost 1.49.0"
-        curl -L -o $TARBALLDIR/boost_1_49_0.tar.bz2 http://sourceforge.net/projects/boost/files/boost/1.49.0/boost_1_49_0.tar.bz2/download
-    fi
-    
-    doneSection
-}
-
 #===============================================================================
-
 cleanEverythingReadyToStart()
 {
     echo Cleaning everything before we start to build...
@@ -99,6 +90,17 @@ cleanEverythingReadyToStart()
     rm -rf $BUILDDIR
     rm -rf $PREFIXDIR
     rm -rf $FRAMEWORKDIR
+    doneSection
+}
+
+#===============================================================================
+downloadBoost1_49_0()
+{
+    if [ ! -s $TARBALLDIR/boost_1_49_0.tar.bz2 ]; then
+        echo "Downloading boost 1.49.0"
+        curl -L -o $TARBALLDIR/boost_1_49_0.tar.bz2 http://sourceforge.net/projects/boost/files/boost/1.49.0/boost_1_49_0.tar.bz2/download
+    fi
+    
     doneSection
 }
 
@@ -114,6 +116,15 @@ unpackBoost()
 }
 
 #===============================================================================
+patchBoost()
+{
+    if [ "$BOOST_VERSION" == "1_49_0" ]; then
+        echo "Patching boost to work with Xcode 4.3"
+        curl -Ls https://svn.boost.org/trac/boost/raw-attachment/ticket/6686/xcode_43.diff | patch $BOOST_SRC/tools/build/v2/tools/darwin.jam
+    fi
+}
+
+#===============================================================================
 
 writeBjamUserConfig()
 {
@@ -123,15 +134,15 @@ writeBjamUserConfig()
     #mkdir -p $BUILDDIR
     #cat > ~/user-config.jam <<EOF
     cat >> $BOOST_SRC/tools/build/v2/user-config.jam <<EOF
-using darwin : ${IPHONE_SDKVERSION}~iphonesim
-   : $DEVELOPER_DIR/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -arch i386 -fvisibility=hidden -fvisibility-inlines-hidden $EXTRA_CPPFLAGS
-   : <striper>
-   : <architecture>x86 <target-os>iphone
-   ;
 using darwin : ${IPHONE_SDKVERSION}~iphone
-   : $DEVELOPER_DIR/Platforms/iPhoneOS.platform/Developer/usr/bin/clang -arch armv7 -mthumb -fvisibility=hidden -fvisibility-inlines-hidden $EXTRA_CPPFLAGS
+   : $XCODE_ROOT/Toolchains/XcodeDefault.xctoolchain/usr/bin/$COMPILER -arch armv7 -fvisibility=hidden -fvisibility-inlines-hidden $EXTRA_CPPFLAGS
    : <striper>
    : <architecture>arm <target-os>iphone
+   ;
+using darwin : ${IPHONE_SDKVERSION}~iphonesim
+   : $XCODE_ROOT/Toolchains/XcodeDefault.xctoolchain/usr/bin/$COMPILER -arch i386 -fvisibility=hidden -fvisibility-inlines-hidden $EXTRA_CPPFLAGS
+   : <striper>
+   : <architecture>x86 <target-os>iphone
    ;
 EOF
     doneSection
@@ -145,7 +156,7 @@ inventMissingHeaders()
     # They are supported on the device, so we copy them from x86 SDK to a staging area
     # to use them on ARM, too.
     echo Invent missing headers
-    cp $DEVELOPER_DIR/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator${IPHONE_SDKVERSION}.sdk/usr/include/{crt_externs,bzlib}.h $BOOST_SRC
+    cp $XCODE_ROOT/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator${IPHONE_SDKVERSION}.sdk/usr/include/{crt_externs,bzlib}.h $BOOST_SRC
 }
 
 #===============================================================================
@@ -322,6 +333,7 @@ case $BOOST_VERSION in
         cleanEverythingReadyToStart
         downloadBoost1_49_0
         unpackBoost
+        patchBoost
         inventMissingHeaders
         writeBjamUserConfig
         bootstrapBoost
