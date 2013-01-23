@@ -18,6 +18,8 @@
 # Then go get the source tar.bz of the boost you want to build, shove it in the
 # same directory as this script, and run "./boost.sh". Grab a cuppa. And voila.
 #===============================================================================
+# http://stackoverflow.com/questions/12549489/compile-library-for-armv7s-cputype-12-and-cpusubtype-11
+: ${LIPO="xcrun -sdk iphoneos lipo"}
 
 : ${BOOST_VERSION:=1_49_0}
 : ${BOOST_LIBS:="thread signals filesystem regex program_options system graph date_time"}
@@ -32,6 +34,7 @@
 #
 # Should perhaps also consider/use instead: -BOOST_SP_USE_PTHREADS
 
+
 : ${TARBALLDIR:=`pwd`}
 : ${SRCDIR:=`pwd`/src}
 : ${BUILDDIR:=`pwd`/build}
@@ -39,7 +42,6 @@
 : ${FRAMEWORKDIR:=`pwd`/framework}
 : ${XCODE_ROOT:=`xcode-select -print-path`}
 : ${COMPILER:=clang++}
-
 BOOST_TARBALL=$TARBALLDIR/boost_$BOOST_VERSION.tar.bz2
     BOOST_SRC=$SRCDIR/boost_${BOOST_VERSION}
 
@@ -61,6 +63,7 @@ echo "BUILDDIR:          $BUILDDIR"
 echo "PREFIXDIR:         $PREFIXDIR"
 echo "FRAMEWORKDIR:      $FRAMEWORKDIR"
 echo "IPHONE_SDKVERSION: $IPHONE_SDKVERSION"
+echo "LIPO: 			 $LIPO"
 echo
 
 #===============================================================================
@@ -135,7 +138,7 @@ writeBjamUserConfig()
     #cat > ~/user-config.jam <<EOF
     cat >> $BOOST_SRC/tools/build/v2/user-config.jam <<EOF
 using darwin : ${IPHONE_SDKVERSION}~iphone
-   : $XCODE_ROOT/Toolchains/XcodeDefault.xctoolchain/usr/bin/$COMPILER -arch armv7 -fvisibility=hidden -fvisibility-inlines-hidden $EXTRA_CPPFLAGS
+   : $XCODE_ROOT/Toolchains/XcodeDefault.xctoolchain/usr/bin/$COMPILER -arch armv7 -arch armv7s -fvisibility=hidden -fvisibility-inlines-hidden $EXTRA_CPPFLAGS
    : <striper>
    : <architecture>arm <target-os>iphone
    ;
@@ -195,7 +198,7 @@ lipoficate()
     I386=$BOOST_SRC/bin.v2/libs/$NAME/build/darwin-$IPHONE_SDKVERSION~iphonesim/release/architecture-x86/link-static/macosx-version-iphonesim-$IPHONE_SDKVERSION/target-os-iphone/threading-multi/libboost_$NAME.a
 
     mkdir -p $PREFIXDIR/lib
-    lipo \
+    $LIPO \
         -create \
         "$ARMV6" \
         "$I386" \
@@ -222,6 +225,7 @@ scrunchAllLibsTogetherInOneLibPerPlatform()
 
     mkdir -p $BUILDDIR/armv6/obj
     mkdir -p $BUILDDIR/armv7/obj
+    mkdir -p $BUILDDIR/armv7s/obj
     mkdir -p $BUILDDIR/i386/obj
 
     ALL_LIBS=""
@@ -229,8 +233,9 @@ scrunchAllLibsTogetherInOneLibPerPlatform()
     echo Splitting all existing fat binaries...
     for NAME in $BOOST_LIBS; do
         ALL_LIBS="$ALL_LIBS libboost_$NAME.a"
-        lipo "$BOOST_SRC/bin.v2/libs/$NAME/build/darwin-${IPHONE_SDKVERSION}~iphone/release/architecture-arm/link-static/macosx-version-iphone-$IPHONE_SDKVERSION/target-os-iphone/threading-multi/libboost_$NAME.a" -thin armv6 -o $BUILDDIR/armv6/libboost_$NAME.a
-        lipo "$BOOST_SRC/bin.v2/libs/$NAME/build/darwin-${IPHONE_SDKVERSION}~iphone/release/architecture-arm/link-static/macosx-version-iphone-$IPHONE_SDKVERSION/target-os-iphone/threading-multi/libboost_$NAME.a" -thin armv7 -o $BUILDDIR/armv7/libboost_$NAME.a
+        $LIPO "$BOOST_SRC/bin.v2/libs/$NAME/build/darwin-${IPHONE_SDKVERSION}~iphone/release/architecture-arm/link-static/macosx-version-iphone-$IPHONE_SDKVERSION/target-os-iphone/threading-multi/libboost_$NAME.a" -thin armv6 -o $BUILDDIR/armv6/libboost_$NAME.a
+        $LIPO "$BOOST_SRC/bin.v2/libs/$NAME/build/darwin-${IPHONE_SDKVERSION}~iphone/release/architecture-arm/link-static/macosx-version-iphone-$IPHONE_SDKVERSION/target-os-iphone/threading-multi/libboost_$NAME.a" -thin armv7 -o $BUILDDIR/armv7/libboost_$NAME.a
+        $LIPO "$BOOST_SRC/bin.v2/libs/$NAME/build/darwin-${IPHONE_SDKVERSION}~iphone/release/architecture-arm/link-static/macosx-version-iphone-$IPHONE_SDKVERSION/target-os-iphone/threading-multi/libboost_$NAME.a" -thin armv7s -o $BUILDDIR/armv7s/libboost_$NAME.a
         cp "$BOOST_SRC/bin.v2/libs/$NAME/build/darwin-${IPHONE_SDKVERSION}~iphonesim/release/architecture-x86/link-static/macosx-version-iphonesim-$IPHONE_SDKVERSION/target-os-iphone/threading-multi/libboost_$NAME.a" $BUILDDIR/i386/
     done
 
@@ -239,6 +244,7 @@ scrunchAllLibsTogetherInOneLibPerPlatform()
         echo Decomposing $NAME...
         (cd $BUILDDIR/armv6/obj; ar -x ../$NAME );
         (cd $BUILDDIR/armv7/obj; ar -x ../$NAME );
+        (cd $BUILDDIR/armv7s/obj; ar -x ../$NAME );
         (cd $BUILDDIR/i386/obj; ar -x ../$NAME );
     done
 
@@ -248,6 +254,8 @@ scrunchAllLibsTogetherInOneLibPerPlatform()
     (cd $BUILDDIR/armv6; $ARM_DEV_DIR/ar crus libboost.a obj/*.o; )
     echo ...armv7
     (cd $BUILDDIR/armv7; $ARM_DEV_DIR/ar crus libboost.a obj/*.o; )
+    echo ...armv7s
+    (cd $BUILDDIR/armv7s; $ARM_DEV_DIR/ar crus libboost.a obj/*.o; )
     echo ...i386
     (cd $BUILDDIR/i386;  $SIM_DEV_DIR/ar crus libboost.a obj/*.o; )
 }
@@ -285,10 +293,11 @@ buildFramework()
     FRAMEWORK_INSTALL_NAME=$FRAMEWORK_BUNDLE/Versions/$FRAMEWORK_VERSION/$FRAMEWORK_NAME
 
     echo "Lipoing library into $FRAMEWORK_INSTALL_NAME..."
-    lipo \
+    $LIPO \
         -create \
         -arch armv6 "$BUILDDIR/armv6/libboost.a" \
         -arch armv7 "$BUILDDIR/armv7/libboost.a" \
+        -arch armv7s "$BUILDDIR/armv7s/libboost.a" \
         -arch i386  "$BUILDDIR/i386/libboost.a" \
         -o          "$FRAMEWORK_INSTALL_NAME" \
     || abort "Lipo $1 failed"
