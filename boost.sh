@@ -23,7 +23,7 @@
 
 : ${BOOST_VERSION:=1_49_0}
 : ${BOOST_LIBS:="thread signals filesystem regex program_options system graph date_time"}
-: ${IPHONE_SDKVERSION:=6.0}
+: ${IPHONE_SDKVERSION:=6.1}
 : ${EXTRA_CPPFLAGS:="-DBOOST_AC_USE_PTHREADS -DBOOST_SP_USE_PTHREADS"}
 
 # The EXTRA_CPPFLAGS definition works around a thread race issue in
