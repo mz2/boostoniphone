@@ -21,7 +21,7 @@
 # http://stackoverflow.com/questions/12549489/compile-library-for-armv7s-cputype-12-and-cpusubtype-11
 : ${LIPO="xcrun -sdk iphoneos lipo"}
 
-: ${BOOST_VERSION:=1_49_0}
+: ${BOOST_VERSION:=1_53_0}
 : ${BOOST_LIBS:="thread signals filesystem regex program_options system graph date_time"}
 : ${IPHONE_SDKVERSION:=6.1}
 : ${EXTRA_CPPFLAGS:="-DBOOST_AC_USE_PTHREADS -DBOOST_SP_USE_PTHREADS"}
@@ -97,11 +97,11 @@ cleanEverythingReadyToStart()
 }
 
 #===============================================================================
-downloadBoost1_49_0()
+downloadBoost1_53_0()
 {
-    if [ ! -s $TARBALLDIR/boost_1_49_0.tar.bz2 ]; then
-        echo "Downloading boost 1.49.0"
-        curl -L -o $TARBALLDIR/boost_1_49_0.tar.bz2 http://sourceforge.net/projects/boost/files/boost/1.49.0/boost_1_49_0.tar.bz2/download
+    if [ ! -s $TARBALLDIR/boost_1_53_0.tar.bz2 ]; then
+        echo "Downloading boost 1.53.0"
+        curl -L -o $TARBALLDIR/boost_1_53_0.tar.bz2 http://sourceforge.net/projects/boost/files/boost/1.53.0/boost_1_53_0.tar.bz2/download
     fi
     
     doneSection
@@ -121,7 +121,7 @@ unpackBoost()
 #===============================================================================
 patchBoost()
 {
-    if [ "$BOOST_VERSION" == "1_49_0" ]; then
+    if [ "$BOOST_VERSION" == "1_53_0" ]; then
         echo "Patching boost to work with Xcode 4.3"
         curl -Ls https://svn.boost.org/trac/boost/raw-attachment/ticket/6686/xcode_43.diff | patch $BOOST_SRC/tools/build/v2/tools/darwin.jam
     fi
@@ -175,7 +175,7 @@ bootstrapBoost()
 
 #===============================================================================
 
-buildBoostForiPhoneOS_1_49_0()
+buildBoostForiPhoneOS_1_53_0()
 {
     cd $BOOST_SRC
     
@@ -338,15 +338,15 @@ EOF
 mkdir -p $BUILDDIR
 
 case $BOOST_VERSION in
-    1_49_0 )
+    1_53_0 )
         cleanEverythingReadyToStart
-        downloadBoost1_49_0
+        downloadBoost1_53_0
         unpackBoost
         patchBoost
         inventMissingHeaders
         writeBjamUserConfig
         bootstrapBoost
-        buildBoostForiPhoneOS_1_49_0
+        buildBoostForiPhoneOS_1_53_0
         scrunchAllLibsTogetherInOneLibPerPlatform
         lipoAllBoostLibraries
         buildFramework
